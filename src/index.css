@@ -1,0 +1,551 @@
+/* ============================================================
+   index.css
+   All visual styling lives here — NO inline styles in any
+   component file. Every className used in JSX files is defined
+   in this one stylesheet.
+   ============================================================ */
+
+/* ── RESET / BASE ── */
+/* PSEUDO: zero out weird default browser spacing and sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* PSEUDO: set the default font and background color for the whole page */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f0eb;
+  color: #2c2c2c;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a {
+  color: #5a3e2b;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ── NAVBAR ── */
+/* PSEUDO: the top bar that spans the full width of the screen */
+.navbar {
+  background-color: #3b2314;
+  color: #fff;
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* PSEUDO: the site title/logo on the left side of the navbar */
+.navbar-brand {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.navbar-brand:hover {
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+/* PSEUDO: container for the links on the right side of the navbar */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+/* PSEUDO: individual nav links (Books, Account, Login, Register) */
+.nav-link {
+  color: #f0e6d3;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* PSEUDO: the Logout button — looks like a subtle button, not a link */
+.btn-logout {
+  background-color: transparent;
+  border: 1px solid #f0e6d3;
+  color: #f0e6d3;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-logout:hover {
+  background-color: #f0e6d3;
+  color: #3b2314;
+}
+
+/* ── MAIN CONTENT AREA ── */
+/* PSEUDO: everything below the navbar sits in here */
+.main-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── PAGE CONTAINER ── */
+/* PSEUDO: used on each page to keep content from stretching too wide */
+.page-container {
+  width: 100%;
+}
+
+/* ── PAGE TITLE ── */
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3b2314;
+  margin-bottom: 1.5rem;
+}
+
+/* ── STATUS MESSAGES (loading, errors, empty states) ── */
+.status-message {
+  font-size: 1.1rem;
+  color: #666;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-message {
+  color: #c0392b;
+}
+
+/* ── AVAILABILITY BADGES ── */
+/* PSEUDO: the small coloured tag that says "Available" or "Checked Out" */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-available {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.badge-unavailable {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* ── BOOKS GRID (BooksPage) ── */
+/* PSEUDO: a grid of book cards — 3 columns on wide screens,
+           2 on medium screens, 1 on small screens */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ── BOOK CARD ── */
+/* PSEUDO: each individual card in the grid */
+.book-card {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+  text-decoration: none;
+}
+
+/* PSEUDO: the cover image at the top of each card */
+.book-card-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+  background-color: #e8ddd3;
+}
+
+/* PSEUDO: the text area at the bottom of each card */
+.book-card-info {
+  padding: 0.8rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.book-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #2c2c2c;
+  line-height: 1.3;
+}
+
+.book-card-author {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* ── BOOK DETAIL PAGE ── */
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: #5a3e2b;
+  font-size: 0.9rem;
+}
+
+/* PSEUDO: the two-column layout: image on left, info on right */
+.book-detail {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.book-detail-image {
+  width: 260px;
+  min-width: 260px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
+}
+
+.book-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.book-detail-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c2c2c;
+  line-height: 1.3;
+}
+
+.book-detail-author {
+  font-size: 1rem;
+  color: #666;
+}
+
+.book-detail-description {
+  margin-top: 0.5rem;
+  font-size: 0.97rem;
+  color: #444;
+  line-height: 1.7;
+}
+
+/* ── RESERVE SECTION (BookDetailPage) ── */
+.reserve-section {
+  margin-top: 1rem;
+}
+
+.reserve-prompt {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* PSEUDO: the big "Reserve This Book" button */
+.btn-reserve {
+  padding: 0.65rem 1.5rem;
+  background-color: #3b2314;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-reserve:hover:not(:disabled) {
+  background-color: #5a3e2b;
+}
+
+/* PSEUDO: greyed-out style for a disabled button */
+.btn-reserve:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}
+
+.reserve-message {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: #155724;
+  font-weight: 600;
+}
+
+/* ── ACCOUNT PAGE ── */
+
+/* PSEUDO: the "not logged in" box */
+.account-guest {
+  max-width: 400px;
+  margin: 4rem auto;
+  text-align: center;
+}
+
+.account-guest-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #3b2314;
+  margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #e0d0c0;
+}
+
+/* ── PROFILE CARD ── */
+.profile-section {
+  margin-bottom: 2.5rem;
+}
+
+.profile-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.profile-label {
+  font-weight: 700;
+  color: #3b2314;
+}
+
+/* ── RESERVATIONS LIST ── */
+.reservations-section {
+  margin-bottom: 2rem;
+}
+
+/* PSEUDO: the <ul> holding all reservation rows — remove default bullet styling */
+.reservations-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* PSEUDO: each row is one reservation: cover image + info + return button */
+.reservation-item {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.reservation-cover {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.reservation-info {
+  flex: 1;
+}
+
+.reservation-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.reservation-author {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 0.2rem;
+}
+
+/* PSEUDO: the "Return" button on each reservation row */
+.btn-return {
+  padding: 0.45rem 1rem;
+  background-color: #a93226;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.btn-return:hover {
+  background-color: #c0392b;
+}
+
+/* ── AUTH FORMS (Login + Register) ── */
+
+/* PSEUDO: centers the form card on the page */
+.form-wrapper {
+  max-width: 420px;
+  margin: 3rem auto;
+  background-color: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* PSEUDO: the red error box shown when login/register fails */
+.form-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* PSEUDO: the form element itself */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* PSEUDO: each label + input pair */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3b2314;
+}
+
+.form-input {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #faf8f6;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #3b2314;
+}
+
+/* PSEUDO: the "Don't have an account? Register here" line */
+.form-switch {
+  margin-top: 1.2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* ── SHARED BUTTONS ── */
+
+/* PSEUDO: solid dark brown primary button */
+.btn-primary {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  background-color: #3b2314;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #5a3e2b;
+  text-decoration: none;
+}
+
+.btn-primary:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}
+
+/* PSEUDO: outlined secondary button */
+.btn-secondary {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  background-color: #fff;
+  color: #3b2314;
+  border: 2px solid #3b2314;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #3b2314;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* PSEUDO: makes the button stretch the full width of its container */
+.btn-full {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* ── RESPONSIVE TWEAKS ── */
+/* PSEUDO: on small screens (phones), stack the book detail into one column */
+@media (max-width: 640px) {
+  .book-detail {
+    flex-direction: column;
+  }
+
+  .book-detail-image {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .navbar {
+    padding: 0 1rem;
+  }
+
+  .main-content {
+    padding: 1.2rem 1rem;
+  }
+}
